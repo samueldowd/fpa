@@ -1,0 +1,374 @@
+{
+  "retrieved_at_utc": "2025-01-01T12:00:00+00:00",
+  "devices": [
+    {
+      "id": 101,
+      "device_id": "00000000-0000-4000-8000-000000000001",
+      "title": "Example Baby Brezza",
+      "wifi_mac_address": "020000000001",
+      "ble_mac_address": "020000000002",
+      "bottles": [
+        {
+          "id": 1001,
+          "title": "Preset 2oz",
+          "temperature": 1,
+          "powder": 5,
+          "volume": 2,
+          "volume_unit": "oz",
+          "water_only": false,
+          "formula": {
+            "territory": "United States of America",
+            "brand": "Bobbie",
+            "type": "Organic Whole Milk",
+            "stage": "0-12 Months",
+            "setting": 5,
+            "model": "advanced",
+            "density": null
+          }
+        },
+        {
+          "id": 1002,
+          "title": "Preset 7 oz",
+          "temperature": 1,
+          "powder": 5,
+          "volume": 7,
+          "volume_unit": "oz",
+          "water_only": false,
+          "formula": {
+            "territory": null,
+            "brand": null,
+            "type": null,
+            "stage": null,
+            "setting": null,
+            "model": null,
+            "density": null
+          }
+        },
+        {
+          "id": 1003,
+          "title": "Preset 3 oz",
+          "temperature": 1,
+          "powder": 4,
+          "volume": 4,
+          "volume_unit": "oz",
+          "water_only": false,
+          "formula": {
+            "territory": "United States of America",
+            "brand": "Bobbie",
+            "type": "Organic Whole Milk",
+            "stage": "0-12 Months",
+            "setting": 5,
+            "model": "advanced",
+            "density": null
+          }
+        },
+        {
+          "id": 1004,
+          "title": "2oz Water",
+          "temperature": 0,
+          "powder": 6,
+          "volume": 2,
+          "volume_unit": "oz",
+          "water_only": false,
+          "formula": {
+            "territory": null,
+            "brand": null,
+            "type": null,
+            "stage": null,
+            "setting": null,
+            "model": null,
+            "density": null
+          }
+        }
+      ],
+      "bottle_creation_log": [
+        {
+          "id": 9010,
+          "volume": "2",
+          "volume_unit": "oz",
+          "temperature": 1,
+          "bottle_id": 1004,
+          "powder_setting": 5,
+          "water_only": false,
+          "completion_timestamp": "1735732721"
+        },
+        {
+          "id": 9009,
+          "volume": "2",
+          "volume_unit": "oz",
+          "temperature": 1,
+          "bottle_id": 1004,
+          "powder_setting": 5,
+          "water_only": false,
+          "completion_timestamp": "1735732697"
+        },
+        {
+          "id": 9008,
+          "volume": "2",
+          "volume_unit": "oz",
+          "temperature": 1,
+          "bottle_id": 1004,
+          "powder_setting": 5,
+          "water_only": false,
+          "completion_timestamp": "1735732687"
+        },
+        {
+          "id": 9007,
+          "volume": "2",
+          "volume_unit": "oz",
+          "temperature": 1,
+          "bottle_id": 1004,
+          "powder_setting": 5,
+          "water_only": false,
+          "completion_timestamp": "1735732679"
+        },
+        {
+          "id": 9006,
+          "volume": "6",
+          "volume_unit": "oz",
+          "temperature": 1,
+          "bottle_id": 1004,
+          "powder_setting": 5,
+          "water_only": true,
+          "completion_timestamp": "1735732660"
+        },
+        {
+          "id": 9005,
+          "volume": "2",
+          "volume_unit": "oz",
+          "temperature": 0,
+          "bottle_id": 1004,
+          "powder_setting": 6,
+          "water_only": false,
+          "completion_timestamp": "1735731967"
+        },
+        {
+          "id": 9004,
+          "volume": "7",
+          "volume_unit": "oz",
+          "temperature": 1,
+          "bottle_id": null,
+          "powder_setting": 5,
+          "water_only": true,
+          "completion_timestamp": "1735731121"
+        },
+        {
+          "id": 9003,
+          "volume": "7",
+          "volume_unit": "oz",
+          "temperature": 1,
+          "bottle_id": null,
+          "powder_setting": 6,
+          "water_only": true,
+          "completion_timestamp": "1735730837"
+        },
+        {
+          "id": 9002,
+          "volume": "7",
+          "volume_unit": "oz",
+          "temperature": 1,
+          "bottle_id": null,
+          "powder_setting": 5,
+          "water_only": false,
+          "completion_timestamp": "1735286018"
+        },
+        {
+          "id": 9001,
+          "volume": "7",
+          "volume_unit": "oz",
+          "temperature": 1,
+          "bottle_id": null,
+          "powder_setting": 5,
+          "water_only": false,
+          "completion_timestamp": "1735272283"
+        }
+      ],
+      "shadow": {
+        "connected": true,
+        "temperature": 1,
+        "powder": 5,
+        "volume": 2,
+        "volume_unit": "oz",
+        "making_bottle": false,
+        "water_only": false,
+        "bottle_missing": true,
+        "funnel_cleaning_needed": false,
+        "funnel_out": false,
+        "lid_open": false,
+        "low_water": false
+      },
+      "raw_shadow": {
+        "state": {
+          "reported": {
+            "connected": true,
+            "firmware": {
+              "isUpdating": false,
+              "version": 62,
+              "location": ""
+            },
+            "userId": "example-account",
+            "wifiMacAddress": "020000000001",
+            "bleMacAddress": "020000000002",
+            "settings": {
+              "temperature": 1,
+              "powder": 5,
+              "volume": 2,
+              "volumeUnit": "oz",
+              "makingBottle": false,
+              "waterOnly": false
+            },
+            "hardware": {
+              "alerts": {
+                "lidOpen": false,
+                "lowWater": false,
+                "tempHeating": false,
+                "bottleMissing": true,
+                "tempCooling": false,
+                "funnelCleaningNeeded": false,
+                "funnelOut": false
+              }
+            },
+            "lastBottle": {
+              "volume": 2,
+              "volumeUnit": "oz",
+              "temperature": 1,
+              "errors": {
+                "powderMotor": false,
+                "wheelMotor": false,
+                "waterMeter": false,
+                "tempSensor": false,
+                "waterLevel": false,
+                "hotWater": false,
+                "lidOpened": false,
+                "funnelRemoved": false
+              },
+              "waterOnly": false,
+              "powderSetting": 5,
+              "completionTimestamp": 1735732721
+            }
+          }
+        },
+        "metadata": {
+          "reported": {
+            "connected": {
+              "timestamp": 1735732743
+            },
+            "firmware": {
+              "isUpdating": {
+                "timestamp": 1735730294
+              },
+              "version": {
+                "timestamp": 1735730294
+              },
+              "location": {
+                "timestamp": 1735730294
+              }
+            },
+            "userId": {
+              "timestamp": 1735730276
+            },
+            "wifiMacAddress": {
+              "timestamp": 1735730276
+            },
+            "bleMacAddress": {
+              "timestamp": 1735730276
+            },
+            "settings": {
+              "temperature": {
+                "timestamp": 1735732721
+              },
+              "powder": {
+                "timestamp": 1735732721
+              },
+              "volume": {
+                "timestamp": 1735732721
+              },
+              "volumeUnit": {
+                "timestamp": 1735732721
+              },
+              "makingBottle": {
+                "timestamp": 1735732721
+              },
+              "waterOnly": {
+                "timestamp": 1735732721
+              }
+            },
+            "hardware": {
+              "alerts": {
+                "lidOpen": {
+                  "timestamp": 1735113269
+                },
+                "lowWater": {
+                  "timestamp": 1735261330
+                },
+                "tempHeating": {
+                  "timestamp": 1735732773
+                },
+                "bottleMissing": {
+                  "timestamp": 1735732735
+                },
+                "tempCooling": {
+                  "timestamp": 1735732060
+                },
+                "funnelCleaningNeeded": {
+                  "timestamp": 1735732784
+                },
+                "funnelOut": {
+                  "timestamp": 1735732784
+                }
+              }
+            },
+            "lastBottle": {
+              "volume": {
+                "timestamp": 1735732721
+              },
+              "volumeUnit": {
+                "timestamp": 1735732721
+              },
+              "temperature": {
+                "timestamp": 1735732721
+              },
+              "errors": {
+                "powderMotor": {
+                  "timestamp": 1735732717
+                },
+                "wheelMotor": {
+                  "timestamp": 1735732717
+                },
+                "waterMeter": {
+                  "timestamp": 1735732717
+                },
+                "tempSensor": {
+                  "timestamp": 1735732717
+                },
+                "waterLevel": {
+                  "timestamp": 1735732717
+                },
+                "hotWater": {
+                  "timestamp": 1735732717
+                },
+                "lidOpened": {
+                  "timestamp": 1735732717
+                },
+                "funnelRemoved": {
+                  "timestamp": 1735732717
+                }
+              },
+              "waterOnly": {
+                "timestamp": 1735732721
+              },
+              "powderSetting": {
+                "timestamp": 1735732721
+              },
+              "completionTimestamp": {
+                "timestamp": 1735732721
+              }
+            }
+          }
+        },
+        "version": 351708,
+        "timestamp": 1735732800
+      }
+    }
+  ]
+}
