@@ -1,0 +1,864 @@
+{
+  "home_assistant": {
+    "arch": "arm64",
+    "dev": false,
+    "docker": false,
+    "hassio": false,
+    "installation_type": "Home Assistant Core",
+    "os_name": "Linux",
+    "os_version": "25.6.0",
+    "python_version": "3.14.2",
+    "timezone": "US/Pacific",
+    "version": "2026.10.2",
+    "virtualenv": true,
+    "run_as_root": false
+  },
+  "custom_components": {
+    "fpa": {
+      "documentation": "https://github.com/samueldowd/fpa",
+      "version": "1.0.0",
+      "requirements": []
+    }
+  },
+  "integration_manifest": {
+    "domain": "fpa",
+    "name": "Formula Pro Advanced WiFi",
+    "codeowners": [
+      "samueldowd"
+    ],
+    "config_flow": true,
+    "documentation": "https://github.com/samueldowd/fpa",
+    "integration_type": "hub",
+    "iot_class": "cloud_push",
+    "issue_tracker": "https://github.com/samueldowd/fpa/issues",
+    "requirements": [],
+    "version": "1.0.0",
+    "is_built_in": false,
+    "overwrites_built_in": false
+  },
+  "setup_times": {},
+  "data": {
+    "schema_version": 1,
+    "integration": {
+      "version": "1.0.0",
+      "client_origin": "joncar/pybabyfpa",
+      "reviewed_client_version": "0.0.7",
+      "client_revision": "8f91cdbc38025d753dcd437f15fedeea5c63253a",
+      "distribution": "vendored-adaptation"
+    },
+    "entry": {
+      "state": "loaded",
+      "runtime_available": true,
+      "authenticated": true,
+      "options": {}
+    },
+    "devices": {
+      "device_1": {
+        "connection": {
+          "transport_connected": true,
+          "appliance_connected": true,
+          "last_successful_refresh": "2026-10-20T03:50:12.867520+00:00",
+          "last_update": "2026-10-20T03:50:12.881498+00:00",
+          "connected_at": "2026-10-20T03:50:12.866310+00:00",
+          "disconnected_at": null,
+          "successful_connection_count": 1,
+          "reconnect_attempt_count": null,
+          "last_error_category": null,
+          "available": true
+        },
+        "reported_state": {
+          "settings": {
+            "temperature": 0,
+            "powder": 5,
+            "volume": 2,
+            "volume_unit": "oz",
+            "making_bottle": false,
+            "water_only": false
+          },
+          "alerts": {
+            "bottle_missing": true,
+            "funnel_cleaning_needed": false,
+            "funnel_out": false,
+            "lid_open": false,
+            "low_water": false,
+            "heating": false,
+            "cooling": false
+          },
+          "unknown_fields": [],
+          "shadow_version": 351709
+        },
+        "latest_merged_shadow": {
+          "state": {
+            "reported": {
+              "connected": true,
+              "firmware": {
+                "isUpdating": false,
+                "version": 62,
+                "location": "**REDACTED**"
+              },
+              "userId": "account_1",
+              "wifiMacAddress": "device_1",
+              "bleMacAddress": "device_1",
+              "settings": {
+                "temperature": 0,
+                "powder": 5,
+                "volume": 2,
+                "volumeUnit": "oz",
+                "makingBottle": false,
+                "waterOnly": false
+              },
+              "hardware": {
+                "alerts": {
+                  "lidOpen": false,
+                  "lowWater": false,
+                  "tempHeating": false,
+                  "bottleMissing": true,
+                  "tempCooling": false,
+                  "funnelCleaningNeeded": false,
+                  "funnelOut": false
+                }
+              },
+              "lastBottle": {
+                "volume": 2,
+                "volumeUnit": "oz",
+                "temperature": 1,
+                "errors": {
+                  "powderMotor": false,
+                  "wheelMotor": false,
+                  "waterMeter": false,
+                  "tempSensor": false,
+                  "waterLevel": false,
+                  "hotWater": false,
+                  "lidOpened": false,
+                  "funnelRemoved": false
+                },
+                "waterOnly": false,
+                "powderSetting": 5,
+                "completionTimestamp": 1735732721
+              },
+              "email": "**REDACTED**",
+              "nested": [
+                {
+                  "authorization": "**REDACTED**",
+                  "unfamiliar": {
+                    "name": "**REDACTED**",
+                    "token": "**REDACTED**"
+                  }
+                }
+              ],
+              "secret": "**REDACTED**",
+              "url": "**REDACTED**",
+              "title": "**REDACTED**"
+            }
+          },
+          "metadata": {
+            "reported": {
+              "connected": {
+                "timestamp": 1735732743
+              },
+              "firmware": {
+                "isUpdating": {
+                  "timestamp": 1735730294
+                },
+                "version": {
+                  "timestamp": 1735730294
+                },
+                "location": "**REDACTED**"
+              },
+              "userId": {
+                "timestamp": 1735730276
+              },
+              "wifiMacAddress": {
+                "timestamp": 1735730276
+              },
+              "bleMacAddress": {
+                "timestamp": 1735730276
+              },
+              "settings": {
+                "temperature": {
+                  "timestamp": 1735732721
+                },
+                "powder": {
+                  "timestamp": 1735732721
+                },
+                "volume": {
+                  "timestamp": 1735732721
+                },
+                "volumeUnit": {
+                  "timestamp": 1735732721
+                },
+                "makingBottle": {
+                  "timestamp": 1735732721
+                },
+                "waterOnly": {
+                  "timestamp": 1735732721
+                }
+              },
+              "hardware": {
+                "alerts": {
+                  "lidOpen": {
+                    "timestamp": 1735113269
+                  },
+                  "lowWater": {
+                    "timestamp": 1735261330
+                  },
+                  "tempHeating": {
+                    "timestamp": 1735732773
+                  },
+                  "bottleMissing": {
+                    "timestamp": 1735732735
+                  },
+                  "tempCooling": {
+                    "timestamp": 1735732060
+                  },
+                  "funnelCleaningNeeded": {
+                    "timestamp": 1735732784
+                  },
+                  "funnelOut": {
+                    "timestamp": 1735732784
+                  }
+                }
+              },
+              "lastBottle": {
+                "volume": {
+                  "timestamp": 1735732721
+                },
+                "volumeUnit": {
+                  "timestamp": 1735732721
+                },
+                "temperature": {
+                  "timestamp": 1735732721
+                },
+                "errors": {
+                  "powderMotor": {
+                    "timestamp": 1735732717
+                  },
+                  "wheelMotor": {
+                    "timestamp": 1735732717
+                  },
+                  "waterMeter": {
+                    "timestamp": 1735732717
+                  },
+                  "tempSensor": {
+                    "timestamp": 1735732717
+                  },
+                  "waterLevel": {
+                    "timestamp": 1735732717
+                  },
+                  "hotWater": {
+                    "timestamp": 1735732717
+                  },
+                  "lidOpened": {
+                    "timestamp": 1735732717
+                  },
+                  "funnelRemoved": {
+                    "timestamp": 1735732717
+                  }
+                },
+                "waterOnly": {
+                  "timestamp": 1735732721
+                },
+                "powderSetting": {
+                  "timestamp": 1735732721
+                },
+                "completionTimestamp": {
+                  "timestamp": 1735732721
+                }
+              }
+            }
+          },
+          "version": 351709,
+          "timestamp": 1735732800
+        },
+        "presets": {
+          "count": 4,
+          "selected": null,
+          "selected_valid": false,
+          "items": [
+            {
+              "id": "preset_1",
+              "title": "preset_1",
+              "volume": 2,
+              "volume_unit": "oz",
+              "temperature": 1,
+              "powder": 5,
+              "water_only": false,
+              "missing_formula_metadata": false,
+              "powder_metadata_discrepancy": false,
+              "title_volume_discrepancy": null,
+              "title_water_mode_discrepancy": false
+            },
+            {
+              "id": "preset_2",
+              "title": "preset_2",
+              "volume": 7,
+              "volume_unit": "oz",
+              "temperature": 1,
+              "powder": 5,
+              "water_only": false,
+              "missing_formula_metadata": true,
+              "powder_metadata_discrepancy": false,
+              "title_volume_discrepancy": false,
+              "title_water_mode_discrepancy": false
+            },
+            {
+              "id": "preset_3",
+              "title": "preset_3",
+              "volume": 4,
+              "volume_unit": "oz",
+              "temperature": 1,
+              "powder": 4,
+              "water_only": false,
+              "missing_formula_metadata": false,
+              "powder_metadata_discrepancy": true,
+              "title_volume_discrepancy": true,
+              "title_water_mode_discrepancy": false
+            },
+            {
+              "id": "preset_4",
+              "title": "preset_4",
+              "volume": 2,
+              "volume_unit": "oz",
+              "temperature": 0,
+              "powder": 6,
+              "water_only": false,
+              "missing_formula_metadata": true,
+              "powder_metadata_discrepancy": false,
+              "title_volume_discrepancy": false,
+              "title_water_mode_discrepancy": true
+            }
+          ]
+        },
+        "last_preparation": {
+          "completed_at": "2025-01-01T11:58:41+00:00",
+          "record_id": "record_1",
+          "preset_id": "preset_4",
+          "volume": 2,
+          "volume_unit": "oz",
+          "temperature_setting": 1,
+          "powder_setting": 5,
+          "water_only": false,
+          "provenance": "creation_record"
+        },
+        "command_guard": {
+          "pending": false,
+          "occupied": false,
+          "uncertain": false,
+          "running": false,
+          "block_reasons": [
+            "bottle_missing"
+          ],
+          "requested_preset_id": null
+        },
+        "recent_operations": [
+          {
+            "time": "2026-10-20T03:50:12.866311+00:00",
+            "device": "device_1",
+            "category": "connection",
+            "status": "connected",
+            "reason": null,
+            "duration": null,
+            "http_status": null
+          },
+          {
+            "time": "2026-10-20T03:50:12.867394+00:00",
+            "device": "device_1",
+            "category": "preparation",
+            "status": "updated",
+            "reason": "creation_record",
+            "duration": null,
+            "http_status": null
+          },
+          {
+            "time": "2026-10-20T03:50:12.867521+00:00",
+            "device": "device_1",
+            "category": "refresh",
+            "status": "success",
+            "reason": "setup",
+            "duration": 0.0,
+            "http_status": null
+          },
+          {
+            "time": "2026-10-20T03:50:12.881695+00:00",
+            "device": "device_1",
+            "category": "start",
+            "status": "rejected",
+            "reason": "bottle_missing",
+            "duration": null,
+            "http_status": null
+          }
+        ],
+        "recent_websocket_updates": {
+          "max_count": 20,
+          "max_bytes": 262144,
+          "retained_bytes": 319,
+          "evicted": 0,
+          "oversized": 0,
+          "capture_failures": 0,
+          "empty_reason": null,
+          "updates": [
+            {
+              "sequence": 1,
+              "received_at": "2026-10-20T03:50:12.881420+00:00",
+              "subject": "shadow-update",
+              "payload": {
+                "subject": "shadow-update",
+                "body": {
+                  "deviceId": "device_1",
+                  "version": 351709,
+                  "state": {
+                    "reported": {
+                      "settings": {
+                        "temperature": 0
+                      },
+                      "secret": "**REDACTED**",
+                      "url": "**REDACTED**",
+                      "title": "**REDACTED**"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "client_observations": {
+          "firmware": {
+            "version": 62,
+            "isUpdating": false
+          },
+          "last_bottle_errors": {
+            "powderMotor": false,
+            "wheelMotor": false,
+            "waterMeter": false,
+            "tempSensor": false,
+            "waterLevel": false,
+            "hotWater": false,
+            "lidOpened": false,
+            "funnelRemoved": false
+          }
+        }
+      },
+      "device_2": {
+        "connection": {
+          "transport_connected": true,
+          "appliance_connected": true,
+          "last_successful_refresh": "2026-10-20T03:50:12.868915+00:00",
+          "last_update": null,
+          "connected_at": "2026-10-20T03:50:12.868160+00:00",
+          "disconnected_at": null,
+          "successful_connection_count": 1,
+          "reconnect_attempt_count": null,
+          "last_error_category": null,
+          "available": true
+        },
+        "reported_state": {
+          "settings": {
+            "temperature": 1,
+            "powder": 5,
+            "volume": 2,
+            "volume_unit": "oz",
+            "making_bottle": false,
+            "water_only": false
+          },
+          "alerts": {
+            "bottle_missing": true,
+            "funnel_cleaning_needed": false,
+            "funnel_out": false,
+            "lid_open": false,
+            "low_water": false,
+            "heating": false,
+            "cooling": false
+          },
+          "unknown_fields": [],
+          "shadow_version": 351708
+        },
+        "latest_merged_shadow": {
+          "state": {
+            "reported": {
+              "connected": true,
+              "firmware": {
+                "isUpdating": false,
+                "version": 62,
+                "location": "**REDACTED**"
+              },
+              "userId": "account_2",
+              "wifiMacAddress": "device_2",
+              "bleMacAddress": "device_2",
+              "settings": {
+                "temperature": 1,
+                "powder": 5,
+                "volume": 2,
+                "volumeUnit": "oz",
+                "makingBottle": false,
+                "waterOnly": false
+              },
+              "hardware": {
+                "alerts": {
+                  "lidOpen": false,
+                  "lowWater": false,
+                  "tempHeating": false,
+                  "bottleMissing": true,
+                  "tempCooling": false,
+                  "funnelCleaningNeeded": false,
+                  "funnelOut": false
+                }
+              },
+              "lastBottle": {
+                "volume": 2,
+                "volumeUnit": "oz",
+                "temperature": 1,
+                "errors": {
+                  "powderMotor": false,
+                  "wheelMotor": false,
+                  "waterMeter": false,
+                  "tempSensor": false,
+                  "waterLevel": false,
+                  "hotWater": false,
+                  "lidOpened": false,
+                  "funnelRemoved": false
+                },
+                "waterOnly": false,
+                "powderSetting": 5,
+                "completionTimestamp": 1735732721
+              }
+            }
+          },
+          "metadata": {
+            "reported": {
+              "connected": {
+                "timestamp": 1735732743
+              },
+              "firmware": {
+                "isUpdating": {
+                  "timestamp": 1735730294
+                },
+                "version": {
+                  "timestamp": 1735730294
+                },
+                "location": "**REDACTED**"
+              },
+              "userId": {
+                "timestamp": 1735730276
+              },
+              "wifiMacAddress": {
+                "timestamp": 1735730276
+              },
+              "bleMacAddress": {
+                "timestamp": 1735730276
+              },
+              "settings": {
+                "temperature": {
+                  "timestamp": 1735732721
+                },
+                "powder": {
+                  "timestamp": 1735732721
+                },
+                "volume": {
+                  "timestamp": 1735732721
+                },
+                "volumeUnit": {
+                  "timestamp": 1735732721
+                },
+                "makingBottle": {
+                  "timestamp": 1735732721
+                },
+                "waterOnly": {
+                  "timestamp": 1735732721
+                }
+              },
+              "hardware": {
+                "alerts": {
+                  "lidOpen": {
+                    "timestamp": 1735113269
+                  },
+                  "lowWater": {
+                    "timestamp": 1735261330
+                  },
+                  "tempHeating": {
+                    "timestamp": 1735732773
+                  },
+                  "bottleMissing": {
+                    "timestamp": 1735732735
+                  },
+                  "tempCooling": {
+                    "timestamp": 1735732060
+                  },
+                  "funnelCleaningNeeded": {
+                    "timestamp": 1735732784
+                  },
+                  "funnelOut": {
+                    "timestamp": 1735732784
+                  }
+                }
+              },
+              "lastBottle": {
+                "volume": {
+                  "timestamp": 1735732721
+                },
+                "volumeUnit": {
+                  "timestamp": 1735732721
+                },
+                "temperature": {
+                  "timestamp": 1735732721
+                },
+                "errors": {
+                  "powderMotor": {
+                    "timestamp": 1735732717
+                  },
+                  "wheelMotor": {
+                    "timestamp": 1735732717
+                  },
+                  "waterMeter": {
+                    "timestamp": 1735732717
+                  },
+                  "tempSensor": {
+                    "timestamp": 1735732717
+                  },
+                  "waterLevel": {
+                    "timestamp": 1735732717
+                  },
+                  "hotWater": {
+                    "timestamp": 1735732717
+                  },
+                  "lidOpened": {
+                    "timestamp": 1735732717
+                  },
+                  "funnelRemoved": {
+                    "timestamp": 1735732717
+                  }
+                },
+                "waterOnly": {
+                  "timestamp": 1735732721
+                },
+                "powderSetting": {
+                  "timestamp": 1735732721
+                },
+                "completionTimestamp": {
+                  "timestamp": 1735732721
+                }
+              }
+            }
+          },
+          "version": 351708,
+          "timestamp": 1735732800
+        },
+        "presets": {
+          "count": 4,
+          "selected": null,
+          "selected_valid": false,
+          "items": [
+            {
+              "id": "preset_5",
+              "title": "preset_5",
+              "volume": 2,
+              "volume_unit": "oz",
+              "temperature": 1,
+              "powder": 5,
+              "water_only": false,
+              "missing_formula_metadata": false,
+              "powder_metadata_discrepancy": false,
+              "title_volume_discrepancy": false,
+              "title_water_mode_discrepancy": false
+            },
+            {
+              "id": "preset_6",
+              "title": "preset_6",
+              "volume": 7,
+              "volume_unit": "oz",
+              "temperature": 1,
+              "powder": 5,
+              "water_only": false,
+              "missing_formula_metadata": true,
+              "powder_metadata_discrepancy": false,
+              "title_volume_discrepancy": false,
+              "title_water_mode_discrepancy": false
+            },
+            {
+              "id": "preset_7",
+              "title": "preset_7",
+              "volume": 4,
+              "volume_unit": "oz",
+              "temperature": 1,
+              "powder": 4,
+              "water_only": false,
+              "missing_formula_metadata": false,
+              "powder_metadata_discrepancy": true,
+              "title_volume_discrepancy": true,
+              "title_water_mode_discrepancy": false
+            },
+            {
+              "id": "preset_8",
+              "title": "preset_8",
+              "volume": 2,
+              "volume_unit": "oz",
+              "temperature": 0,
+              "powder": 6,
+              "water_only": false,
+              "missing_formula_metadata": true,
+              "powder_metadata_discrepancy": false,
+              "title_volume_discrepancy": false,
+              "title_water_mode_discrepancy": true
+            }
+          ]
+        },
+        "last_preparation": {
+          "completed_at": "2025-01-01T11:58:41+00:00",
+          "record_id": "record_1",
+          "preset_id": "preset_4",
+          "volume": 2,
+          "volume_unit": "oz",
+          "temperature_setting": 1,
+          "powder_setting": 5,
+          "water_only": false,
+          "provenance": "creation_record"
+        },
+        "command_guard": {
+          "pending": false,
+          "occupied": false,
+          "uncertain": false,
+          "running": false,
+          "block_reasons": [
+            "bottle_missing"
+          ],
+          "requested_preset_id": null
+        },
+        "recent_operations": [
+          {
+            "time": "2026-10-20T03:50:12.868161+00:00",
+            "device": "device_2",
+            "category": "connection",
+            "status": "connected",
+            "reason": null,
+            "duration": null,
+            "http_status": null
+          },
+          {
+            "time": "2026-10-20T03:50:12.868796+00:00",
+            "device": "device_2",
+            "category": "preparation",
+            "status": "updated",
+            "reason": "creation_record",
+            "duration": null,
+            "http_status": null
+          },
+          {
+            "time": "2026-10-20T03:50:12.868916+00:00",
+            "device": "device_2",
+            "category": "refresh",
+            "status": "success",
+            "reason": "setup",
+            "duration": 0.0,
+            "http_status": null
+          }
+        ],
+        "recent_websocket_updates": {
+          "max_count": 20,
+          "max_bytes": 262144,
+          "retained_bytes": 0,
+          "evicted": 0,
+          "oversized": 0,
+          "capture_failures": 0,
+          "empty_reason": "no_updates_received_since_entry_load",
+          "updates": []
+        },
+        "client_observations": {
+          "firmware": {
+            "version": 62,
+            "isUpdating": false
+          },
+          "last_bottle_errors": {
+            "powderMotor": false,
+            "wheelMotor": false,
+            "waterMeter": false,
+            "tempSensor": false,
+            "waterLevel": false,
+            "hotWater": false,
+            "lidOpened": false,
+            "funnelRemoved": false
+          }
+        }
+      }
+    },
+    "limitations": [
+      "Latest preparation only; no missed-record replay or lossless history guarantee.",
+      "Operations (50/account) and messages (20 and 256 KiB/machine) are in memory; reload/restart clears them.",
+      "Raw JSON preserves structure with field-aware redactions; unknown scalar values are redacted.",
+      "Timestamps may reveal routines. Review before sharing. HA adds system/integration metadata; device download filenames may contain device names and registry IDs."
+    ],
+    "recent_operations": [
+      {
+        "time": "2026-10-20T03:50:12.865373+00:00",
+        "device": null,
+        "category": "authentication",
+        "status": "success",
+        "reason": null,
+        "duration": null,
+        "http_status": null
+      },
+      {
+        "time": "2026-10-20T03:50:12.866311+00:00",
+        "device": "device_1",
+        "category": "connection",
+        "status": "connected",
+        "reason": null,
+        "duration": null,
+        "http_status": null
+      },
+      {
+        "time": "2026-10-20T03:50:12.867394+00:00",
+        "device": "device_1",
+        "category": "preparation",
+        "status": "updated",
+        "reason": "creation_record",
+        "duration": null,
+        "http_status": null
+      },
+      {
+        "time": "2026-10-20T03:50:12.867521+00:00",
+        "device": "device_1",
+        "category": "refresh",
+        "status": "success",
+        "reason": "setup",
+        "duration": 0.0,
+        "http_status": null
+      },
+      {
+        "time": "2026-10-20T03:50:12.868161+00:00",
+        "device": "device_2",
+        "category": "connection",
+        "status": "connected",
+        "reason": null,
+        "duration": null,
+        "http_status": null
+      },
+      {
+        "time": "2026-10-20T03:50:12.868796+00:00",
+        "device": "device_2",
+        "category": "preparation",
+        "status": "updated",
+        "reason": "creation_record",
+        "duration": null,
+        "http_status": null
+      },
+      {
+        "time": "2026-10-20T03:50:12.868916+00:00",
+        "device": "device_2",
+        "category": "refresh",
+        "status": "success",
+        "reason": "setup",
+        "duration": 0.0,
+        "http_status": null
+      },
+      {
+        "time": "2026-10-20T03:50:12.881695+00:00",
+        "device": "device_1",
+        "category": "start",
+        "status": "rejected",
+        "reason": "bottle_missing",
+        "duration": null,
+        "http_status": null
+      }
+    ]
+  },
+  "issues": []
+}

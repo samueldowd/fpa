@@ -42,6 +42,7 @@ PATH="$PWD/.venv-current/bin:$PATH" PYTHONPATH=/tmp/fpa-ha-core \
 
 The official runner validates all applicable custom-integration plugins. Its dependencies are included in requirements/current.txt. HACS local validation invokes unchanged upstream validators through a filesystem adapter with networking disabled. It verifies the actual manifests, layout, README, local brand asset, MIT license and optional categories. GitHub repository metadata, remote Docker Action, releases and default-store inclusion are publication checks and are not represented as completed local tests. The workflow runs those when a published repository executes CI.
 
+
 ## Build and inspect the delivered artifact
 
 ```sh

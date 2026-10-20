@@ -1,0 +1,10 @@
+{
+  "tested_commit": "9842b579dc0904a9de88cc7709e96741b91c11b0",
+  "runtime_tree_sha256": "ef371fa4718422bdc113921fdf9aa23b6546e6d0769471bbead4376d100e0485",
+  "archive_sha256": "9ec6b538be5fe2ea8deefc0186e5710fbdf772cf1cd5ab281107486deb9774a5",
+  "recorded_at_utc": "2026-10-20T03:51:18.461603+00:00",
+  "recorded_at_client": "2026-10-19T23:51:18.461741-04:00",
+  "runtime_files": 25,
+  "host_platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+  "python": "3.14.2"
+}

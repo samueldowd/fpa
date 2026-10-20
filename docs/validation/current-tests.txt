@@ -1,0 +1,17 @@
+........................................................................ [ 40%]
+........................................................................ [ 80%]
+..................................                                       [100%]
+=============================== warnings summary ===============================
+tests/test_hacs_validation.py::test_original_upstream_validators_are_executed_and_fail_closed[None]
+tests/test_hacs_validation.py::test_original_upstream_validators_are_executed_and_fail_closed[None]
+tests/test_hacs_validation.py::test_original_upstream_validators_are_executed_and_fail_closed[invalid_hacs_key]
+tests/test_hacs_validation.py::test_original_upstream_validators_are_executed_and_fail_closed[invalid_hacs_key]
+tests/test_hacs_validation.py::test_original_upstream_validators_are_executed_and_fail_closed[missing_brand]
+tests/test_hacs_validation.py::test_original_upstream_validators_are_executed_and_fail_closed[missing_brand]
+tests/test_hacs_validation.py::test_original_upstream_validators_are_executed_and_fail_closed[missing_license]
+tests/test_hacs_validation.py::test_original_upstream_validators_are_executed_and_fail_closed[missing_license]
+  /private/tmp/fpa-hacs-integration/custom_components/hacs/utils/decorator.py:63: DeprecationWarning: 'asyncio.iscoroutinefunction' is deprecated and slated for removal in Python 3.16; use inspect.iscoroutinefunction() instead
+    if asyncio.iscoroutinefunction(func):
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+178 passed, 8 warnings in 2.90s

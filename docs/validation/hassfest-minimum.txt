@@ -1,0 +1,39 @@
+Error loading libturbojpeg; Camera snapshot performance will be sub-optimal
+Traceback (most recent call last):
+  File "/private/tmp/fpa-ha-core-min/homeassistant/components/camera/img_util.py", line 93, in __init__
+    TurboJPEGSingleton.__instance = TurboJPEG()
+                                    ~~~~~~~~~^^
+  File "/Users/sam/Documents/ChatGPT/ha-fpa-new/.venv-min/lib/python3.13/site-packages/turbojpeg.py", line 301, in __init__
+    self.__find_turbojpeg() if lib_path is None else lib_path)
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/sam/Documents/ChatGPT/ha-fpa-new/.venv-min/lib/python3.13/site-packages/turbojpeg.py", line 974, in __find_turbojpeg
+    raise RuntimeError(
+    ...<2 lines>...
+        'e.g. jpeg = TurboJPEG(lib_path)')
+RuntimeError: Unable to locate turbojpeg library automatically. You may specify the turbojpeg library path manually.
+e.g. jpeg = TurboJPEG(lib_path)
+Validating application_credentials... done in 0.54s
+Validating bluetooth... done in 0.01s
+Validating codeowners... done in 0.00s
+Validating conditions... done in 0.00s
+Validating config_schema... done in 0.00s
+Validating dependencies... done in 0.14s
+Validating dhcp... done in 0.01s
+Validating icons... done in 0.00s
+Validating integration_info... done in 0.00s
+Validating json... done in 0.00s
+Validating manifest... done in 0.00s
+Validating mqtt... done in 0.01s
+Validating quality_scale... done in 0.00s
+Validating requirements... done in 0.00s
+Validating services... done in 0.00s
+Validating ssdp... done in 0.01s
+Validating translations... done in 0.00s
+Validating triggers... done in 0.00s
+Validating usb... done in 0.01s
+Validating zeroconf... done in 0.01s
+Validating config_flow... done in 0.01s
+
+Integrations: 1
+Invalid integrations: 0
+

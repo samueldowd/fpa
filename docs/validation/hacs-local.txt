@@ -1,0 +1,14 @@
+HACS source: https://github.com/hacs/integration @ 694f741f10e744e2d3f6cc31d84b89d26d0d0f03
+Action wrapper: https://github.com/hacs/action @ 1ebf01c408f29afcb6406bd431bc98fd8cbb15aa
+Mode: original upstream Python validators + local filesystem adapter; network disabled
+PASS local install layout: custom_components/fpa
+PASS upstream hacsjson
+PASS upstream integration_manifest
+PASS upstream information
+PASS upstream brands
+PASS upstream license
+WARNING <Local repository> The integration manifest has no categories, see https://contributors.home-assistant.io/core/integrations/categories/
+PASS upstream integration_categories
+License adapter: classification requires complete local MIT text; GitHub license API detection is unverified
+NOT RUN: remote Docker action image, GitHub description/topics/issues/archive/license metadata, releases, default-store inclusion
+RESULT: 6 upstream local validators passed; 0 failed
