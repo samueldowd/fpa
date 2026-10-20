@@ -1,5 +1,5 @@
 pytest-homeassistant-custom-component==0.13.373
-ruff==0.14.1
+ruff==0.17.1
 markdown-it-py==4.2.0
 linkify-it-py==2.2.0
 aiogithubapi==26.0.0
