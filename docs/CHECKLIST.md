@@ -67,4 +67,3 @@ Every checked item must have evidence: test name/result, validation output, revi
 - [x] Final integrated-source checks and affected earlier checks were rerun as needed; results are tied to the tested revision/tree and are not based only on isolated subagent assertions.
 - [x] `docs/IMPLEMENTATION_VALIDATION.md` contains each stage's checks/outcomes/evidence, failures/corrections/reruns, requirement/checklist mapping, unresolved items, and separate hardware/deployment status; the final response links it and the decision log.
 - [x] Final implementation report distinguishes completed automated checks, pending live validation, known vendor limitations, and any release/deployment work not performed.
-

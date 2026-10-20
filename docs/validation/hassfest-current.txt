@@ -24,4 +24,3 @@ Validating config_flow... done in 0.01s
 
 Integrations: 1
 Invalid integrations: 0
-
