@@ -107,3 +107,9 @@ Fresh-install evidence uses the exact ZIP path described in README and actual HA
 **Not performed:** real vendor login/device observation/physical preparation; production deployment; remote GitHub publication, CI workflow execution or Docker HACS Action; GitHub metadata/license detection/releases/default-store submission. These are outside this local delivery. Six genuine HACS local file validators and both official hassfest runners did run and pass. The HACS route in README is explicitly conditional on later publication; the local ZIP is immediately usable for manual installation.
 
 No custom UI/archive/counters/estimates/writable settings/firmware-error entities/event stream/notifications/unsupported commands were added. No required offline failure or access blocker remains. The final handoff contains the installable archive, README, consolidated evidence, decision log and clean committed source.
+
+## Documentation follow-up — 2026-10-20
+
+The root [README](../README.md) now previews the integration's benefits, use cases, capabilities, and prerequisites. The detailed content and all three YAML examples moved to [USER_GUIDE.md](USER_GUIDE.md), with contextual links from the overview and a return link from the guide. The documentation tests now read the examples from the guide and verify local file links and section fragments in both documents.
+
+Focused verification: `.venv-current/bin/python -m pytest -q tests/test_documentation.py` passed **5 tests**. Targeted Ruff lint and formatting passed. No runtime files changed. The original full-suite, package, and validator results above remain evidence for their recorded release revision; those checks and the release archive were not regenerated for this documentation change. The publication statements above describe the original local delivery, not subsequent repository activity.
