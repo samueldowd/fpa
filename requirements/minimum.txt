@@ -1,6 +1,6 @@
 pytest-homeassistant-custom-component==0.13.289
 # aiodns 3.x requires the pycares 4.x result types.
-pycares==4.11.0
+pycares==5.2.0
 ruff==0.14.1
 markdown-it-py==4.2.0
 linkify-it-py==2.2.0
