@@ -1,8 +1,8 @@
-# Formula Pro Advanced WiFi user guide
+# HA - Formula Pro Advanced user guide
 
 [← Integration overview](../README.md)
 
-Installation, configuration, daily operation, entity and action references, preparation history, and troubleshooting for the Formula Pro Advanced WiFi integration.
+Installation, configuration, daily operation, entity and action references, preparation history, and troubleshooting for HA - Formula Pro Advanced.
 
 Monitor a Baby Brezza Formula Pro Advanced **WiFi**, select a saved cloud preset, deliberately start a preparation, and see its latest reported preparation in Home Assistant. Independent alerts and a native diagnostics download help explain stale data and blocked starts.
 
@@ -40,7 +40,7 @@ Use [samueldowd/fpa](https://github.com/samueldowd/fpa) as a HACS custom reposit
 
 1. Open **HACS**, open its top-right menu, and choose **Custom repositories**.
 2. Add `https://github.com/samueldowd/fpa` with type/category **Integration**.
-3. Find **Formula Pro Advanced WiFi**, open it, and choose **Download**.
+3. Find **HA - Formula Pro Advanced**, open it, and choose **Download**.
 4. Restart HA, then follow Configuration below. Downloading files in HACS does not add the account integration.
 
 HACS reads the conventional `custom_components/fpa` directory from the published repository. No separate Python package or install-time code download is needed.
@@ -53,7 +53,7 @@ HACS reads the conventional `custom_components/fpa` directory from the published
 
 ## Configuration and upgrades
 
-For a new account, open **Settings → Devices & services → Add integration**, find **Formula Pro Advanced WiFi**, and enter the email/password used in the manufacturer's app. Credentials are submitted through the normal HA config flow. HA stores the refresh token; the integration does not retain the password or persist access tokens. Rotated refresh tokens are saved automatically. If authentication expires, use the integration's **Reauthenticate** flow and enter credentials again.
+For a new account, open **Settings → Devices & services → Add integration**, find **HA - Formula Pro Advanced**, and enter the email/password used in the manufacturer's app. Credentials are submitted through the normal HA config flow. HA stores the refresh token; the integration does not retain the password or persist access tokens. Rotated refresh tokens are saved automatically. If authentication expires, use the integration's **Reauthenticate** flow and enter credentials again.
 
 Each account can provide multiple machines. New accounts are deduplicated by an established account identity when available. Existing upstream entries retain their identity/version; a legacy entry with a customized account title may not be recognized as a duplicate, so reuse it instead of adding it again.
 
@@ -202,7 +202,7 @@ After an outage, only the newest preparation is published; missed intermediate r
 
 ## Download diagnostics
 
-Open **Settings → Devices & services → Integrations**, find Formula Pro Advanced WiFi, and use the entry's menu → **Download diagnostics**. On a machine's device page, use its menu → **Download diagnostics** for that machine only. These use HA's native download route; no custom service or config-folder file is created.
+Open **Settings → Devices & services → Integrations**, find **HA - Formula Pro Advanced**, and use the entry's menu → **Download diagnostics**. On a machine's device page, use its menu → **Download diagnostics** for that machine only. These use HA's native download route; no custom service or config-folder file is created.
 
 The report includes authentication/transport/appliance status, freshness and safe errors, settings/alerts, aliased presets/selection, guard block reasons, latest preparation/provenance, up to **50 account operation summaries**, and two distinct raw-data views:
 

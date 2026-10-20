@@ -1,4 +1,4 @@
-"""Constants for Formula Pro Advanced WiFi."""
+"""Constants for HA - Formula Pro Advanced."""
 
 DOMAIN = "fpa"
 ATTR_BOTTLE_ID = "bottle_id"

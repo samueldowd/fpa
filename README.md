@@ -1,4 +1,4 @@
-# Formula Pro Advanced WiFi for Home Assistant
+# HA - Formula Pro Advanced
 
 Bring your Baby Brezza Formula Pro Advanced **WiFi** into Home Assistant. See what the machine is doing, notice when it needs attention, choose a saved preset, and deliberately start a preparation from the same interface you use for the rest of your home.
 

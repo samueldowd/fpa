@@ -1,6 +1,6 @@
 {
   "domain": "fpa",
-  "name": "Formula Pro Advanced WiFi",
+  "name": "HA - Formula Pro Advanced",
   "codeowners": ["@samueldowd"],
   "config_flow": true,
   "documentation": "https://github.com/samueldowd/fpa",

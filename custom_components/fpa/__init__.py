@@ -1,4 +1,4 @@
-"""Formula Pro Advanced WiFi integration."""
+"""HA - Formula Pro Advanced integration."""
 
 from __future__ import annotations
 
