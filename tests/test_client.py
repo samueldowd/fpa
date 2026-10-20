@@ -384,6 +384,7 @@ async def test_subscription_is_idempotent_validates_identity_and_keeps_raw_envel
         await client.subscribe("device-one", messages.append, connection.append)
         await spin_until(lambda: connection == [True])
         assert client.subscription_count == 1
+        assert client.reconnect_attempts == {"device-one": 0}
         assert len(session.connections) == 1
         envelope = {
             "subject": "shadow-update",
@@ -449,9 +450,13 @@ async def test_establishment_failure_reconnects_refreshes_and_reconciles(monkeyp
         assert "reconnected-access" in session.connections[-1][0]
         assert client.refresh_token == "rotated-refresh"
         assert client.last_error is None
+        assert client.reconnect_attempts == {"device-one": 1}
+        await client.subscribe("device-one", Mock(), connections.append)
+        assert client.reconnect_attempts == {"device-one": 1}
     finally:
         await client.close()
     assert socket.closed is True
+    assert client.reconnect_attempts == {}
 
 
 async def test_simultaneous_device_reconnects_share_one_token_rotation(monkeypatch):
@@ -488,6 +493,7 @@ async def test_simultaneous_device_reconnects_share_one_token_rotation(monkeypat
             == 1
         )
         assert len(session.connections) == 4
+        assert client.reconnect_attempts == {"device-one": 1, "device-two": 1}
     finally:
         await client.close()
     assert all(socket.closed for socket in sockets)

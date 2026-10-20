@@ -755,6 +755,8 @@ class DeviceCoordinator(DataUpdateCoordinator[DeviceState]):
                     if not definitive:
                         self.guard.uncertain = True
                     self.last_error = exc.category
+                    if isinstance(exc, AuthenticationError):
+                        self.runtime.handle_client_error(self.device_id, exc)
                     self.runtime.record_operation(
                         self.device_id,
                         "start",

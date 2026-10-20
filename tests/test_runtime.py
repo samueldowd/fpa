@@ -760,3 +760,37 @@ async def test_same_time_missing_record_id_enrichment_does_not_reoccupy(runtime)
     assert device.data.preparation == previous
     assert not device.guard.occupied
     assert not device.guard.uncertain
+
+
+@pytest.mark.parametrize("status", [401, 403])
+async def test_command_auth_rejection_requests_reauth_without_replaying_write(
+    runtime, status
+):
+    from unittest.mock import Mock
+
+    device = ready(runtime)
+    runtime.entry.async_start_reauth = Mock()
+    runtime.api.start_bottle.side_effect = AuthenticationError(status=status)
+    reads_before = runtime.api.get_device_details.await_count
+    with pytest.raises(HomeAssistantError) as raised:
+        await device.async_start(1001)
+    assert raised.value.translation_key == "command_failed"
+    assert runtime.api.get_device_details.await_count == reads_before + 1
+    runtime.api.start_bottle.assert_awaited_once_with(1001)
+    runtime.api.refresh.assert_awaited_once()  # Setup only; no command retry/rotation.
+    runtime.entry.async_start_reauth.assert_called_once_with(runtime.hass)
+    assert not runtime.authenticated
+    assert device.last_error == "authentication"
+    assert not device.guard.pending
+    assert not device.guard.uncertain  # Explicit HTTP rejection did not dispense.
+    assert any(
+        op["category"] == "start"
+        and op["status"] == "rejected"
+        and op["http_status"] == status
+        for op in runtime.operations
+    )
+    # A second safe transport observation of the same failure must not open
+    # duplicate reauthentication flows or replay the failed physical command.
+    runtime.api.error_callback(device.device_id, AuthenticationError(status=status))
+    runtime.entry.async_start_reauth.assert_called_once()
+    runtime.api.start_bottle.assert_awaited_once()

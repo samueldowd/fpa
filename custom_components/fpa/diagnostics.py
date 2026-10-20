@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import re
+from copy import deepcopy
 from dataclasses import asdict, is_dataclass
 from datetime import datetime
 from typing import Any
@@ -253,13 +254,16 @@ def _safe_operations(runtime, context, device_id):
 
 
 def _snapshot(runtime, entry, device_id=None):
-    context = getattr(runtime, "diagnostic_context", PrivacyContext())
+    # Aliases created for this download must not mutate even diagnostic runtime
+    # state; capture owns its own in-memory context between messages.
+    context = deepcopy(getattr(runtime, "diagnostic_context", PrivacyContext()))
     devices = getattr(runtime, "devices", {})
     report = {
         "schema_version": 1,
         "integration": {
             "version": "1.0.0",
             "client_origin": "joncar/pybabyfpa",
+            "reviewed_client_version": "0.0.7",
             "client_revision": "8f91cdbc38025d753dcd437f15fedeea5c63253a",
             "distribution": "vendored-adaptation",
         },
@@ -333,7 +337,12 @@ def _snapshot(runtime, entry, device_id=None):
                 "last_update": _time(device.last_update),
                 "connected_at": _time(device.connected_at),
                 "disconnected_at": _time(device.disconnected_at),
-                "reconnect_count": device.reconnect_count,
+                "successful_connection_count": device.reconnect_count,
+                "reconnect_attempt_count": getattr(
+                    runtime.api, "reconnect_attempts", {}
+                ).get(identifier)
+                if isinstance(getattr(runtime.api, "reconnect_attempts", None), dict)
+                else None,
                 "last_error_category": _category(
                     device.last_error,
                     {

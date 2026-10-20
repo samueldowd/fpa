@@ -1,7 +1,9 @@
 """Native HTTP download privacy, isolation, bounded snapshots and no writes."""
 
 import json
+import os
 from copy import deepcopy
+from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import patch
 
@@ -126,6 +128,7 @@ async def test_entry_device_native_download_full_body_and_framework_filename(
         deepcopy(coordinator.raw_shadow),
         deepcopy(envelope),
     )
+    aliases_before = deepcopy(runtime.diagnostic_context._mapping)
     assert await async_setup_component(hass, "diagnostics", {})
     await hass.async_block_till_done()
     client = await hass_client()
@@ -164,6 +167,9 @@ async def test_entry_device_native_download_full_body_and_framework_filename(
     assert raw["body"]["state"]["reported"]["settings"] == {"temperature": 0}
     assert data["latest_merged_shadow"]["state"]["reported"]["settings"]["volume"] == 2
     assert data["presets"]["selected_valid"] is False
+    assert data["presets"]["items"][2]["title_volume_discrepancy"] is True
+    assert data["presets"]["items"][2]["powder_metadata_discrepancy"] is True
+    assert data["presets"]["items"][3]["title_water_mode_discrepancy"] is True
     assert data["recent_operations"][-1]["reason"] == "bottle_missing"
     assert "home_assistant" in downloaded and "integration_manifest" in downloaded
     registry = er.async_get(hass)
@@ -179,6 +185,12 @@ async def test_entry_device_native_download_full_body_and_framework_filename(
     assert len(device_download["data"]["devices"]) == 1
     assert "PRIVATE_" not in json.dumps(device_download)
     assert (api.reads, api.writes, coordinator.raw_shadow, envelope) == before
+    assert runtime.diagnostic_context._mapping == aliases_before
+    if directory := os.environ.get("FPA_EVIDENCE_DIR"):
+        # Test evidence only; the production diagnostics hook never writes files.
+        (Path(directory) / "representative-native-diagnostics.json").write_text(
+            json.dumps(downloaded, indent=2) + "\n"
+        )
 
 
 async def test_offline_snapshot_isolated_unknown_owner_and_missing_runtime(

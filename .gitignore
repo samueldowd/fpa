@@ -10,3 +10,6 @@ dist/
 .DS_Store
 *.log
 .ha-test/
+.tooling/
+output/
+.playwright-cli/

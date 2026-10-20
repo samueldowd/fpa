@@ -132,3 +132,35 @@ def test_raw_identifiers_resembling_aliases_are_not_trusted():
     assert safe["deviceId"] != raw["deviceId"]
     assert safe["userId"] != raw["userId"]
     assert context.sanitize(safe, already_sanitized=True) == safe
+
+
+def test_known_leaf_names_in_unfamiliar_branches_do_not_authorize_values():
+    raw = message()
+    raw["body"]["unreviewed"] = {
+        "volume": "123456789",
+        "connected": True,
+        "version": 98765,
+    }
+    safe = PrivacyContext().sanitize(raw)
+    assert safe["body"]["unreviewed"] == {
+        "volume": REDACTED,
+        "connected": REDACTED,
+        "version": REDACTED,
+    }
+    assert safe["body"]["state"]["reported"]["settings"]["volume"] == 2
+
+
+def test_identifier_metadata_containers_preserve_structure_without_private_values():
+    raw = {
+        "metadata": {
+            "reported": {
+                "userId": {"timestamp": 1234},
+                "wifiMacAddress": {"timestamp": 1235},
+                "unreviewed": {"timestamp": 87654321},
+            }
+        }
+    }
+    safe = PrivacyContext().sanitize(raw)
+    assert safe["metadata"]["reported"]["userId"] == {"timestamp": 1234}
+    assert safe["metadata"]["reported"]["wifiMacAddress"] == {"timestamp": 1235}
+    assert safe["metadata"]["reported"]["unreviewed"] == {"timestamp": REDACTED}

@@ -1,0 +1,26 @@
+name: Integration problem
+description: Report status, preset, preparation-history or diagnostics behavior.
+body:
+  - type: markdown
+    attributes:
+      value: >-
+        Review diagnostics before sharing. Do not include passwords, tokens, raw
+        exports, authorization/socket URLs, personal labels, or a config directory.
+        Home Assistant controls the download wrapper and device filename; review both.
+  - type: input
+    id: versions
+    attributes:
+      label: Home Assistant and integration versions
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps, expected behavior, observed state or error
+    validations:
+      required: true
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Reviewed diagnostics and relevant safe observations
+      description: Attach the reviewed native entry or device download if useful.

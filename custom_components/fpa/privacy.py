@@ -55,6 +55,69 @@ _IDENTITIES = {
     "record_id": "record",
     "id": "identifier",
 }
+_SETTINGS = {
+    "temperature",
+    "powder",
+    "volume",
+    "volumeUnit",
+    "makingBottle",
+    "waterOnly",
+}
+_ALERTS = {
+    "lidOpen",
+    "lowWater",
+    "tempHeating",
+    "bottleMissing",
+    "tempCooling",
+    "funnelCleaningNeeded",
+    "funnelOut",
+}
+_ERRORS = {
+    "powderMotor",
+    "wheelMotor",
+    "waterMeter",
+    "tempSensor",
+    "waterLevel",
+    "hotWater",
+    "lidOpened",
+    "funnelRemoved",
+}
+_PREPARATION = {
+    "volume",
+    "volumeUnit",
+    "temperature",
+    "powderSetting",
+    "waterOnly",
+    "completionTimestamp",
+}
+_REPORTED_PATHS = (
+    {("connected",)}
+    | {("settings", field) for field in _SETTINGS}
+    | {("hardware", "alerts", field) for field in _ALERTS}
+    | {("lastBottle", field) for field in _PREPARATION}
+    | {("lastBottle", "errors", field) for field in _ERRORS}
+    | {("firmware", field) for field in ("version", "isUpdating")}
+)
+
+
+def _reviewed_path(path: tuple[str, ...], key: str) -> bool:
+    """Approved names only carry approved values at known protocol locations."""
+    location = tuple(part for part in (*path, key) if part)
+    if location[:1] == ("body",):
+        location = location[1:]
+    if location in {("subject",), ("version",), ("timestamp",)}:
+        return True
+    if location[:2] == ("state", "reported"):
+        return location[2:] in _REPORTED_PATHS
+    if location[:2] == ("metadata", "reported") and location[-1:] == ("timestamp",):
+        field = location[2:-1]
+        return field in _REPORTED_PATHS or field in {
+            ("userId",),
+            ("wifiMacAddress",),
+            ("bleMacAddress",),
+            ("firmware", "location"),
+        }
+    return False
 
 
 class PrivacyContext:
@@ -96,16 +159,6 @@ class PrivacyContext:
         """Unknown scalars are redacted; explicit nulls/nesting remain visible."""
         if value is None:
             return None
-        if key in _IDENTITIES:
-            if already_sanitized and value in self._mapping.values():
-                return value
-            kind = _IDENTITIES[key]
-            if key == "id":
-                if any(part in {"lastBottle", "bottleCreationLog"} for part in path):
-                    kind = "record"
-                elif "bottles" in path:
-                    kind = "preset"
-            return self.alias(value, kind)
         if isinstance(value, dict):
             return {
                 k
@@ -123,6 +176,18 @@ class PrivacyContext:
                 self.sanitize(v, key, path, already_sanitized=already_sanitized)
                 for v in value
             ]
+        if key in _IDENTITIES:
+            if already_sanitized and value in self._mapping.values():
+                return value
+            kind = _IDENTITIES[key]
+            if key == "id":
+                if any(part in {"lastBottle", "bottleCreationLog"} for part in path):
+                    kind = "record"
+                elif "bottles" in path:
+                    kind = "preset"
+            return self.alias(value, kind)
+        if not _reviewed_path(path, key):
+            return REDACTED
         if isinstance(value, bool):
             return value if key in _BOOLEANS else REDACTED
         if key in _NUMBERS and isinstance(value, (int, float, str)):

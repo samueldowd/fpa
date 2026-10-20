@@ -135,6 +135,7 @@ class FpaClient:
         self._auth_lock = asyncio.Lock()
         self._close_lock = asyncio.Lock()
         self._subscriptions: dict[str, _Subscription] = {}
+        self.reconnect_attempts: dict[str, int] = {}
         self._auth_generation = 0
         self._token: str | None = None
         self.refresh_token: str | None = None
@@ -401,6 +402,7 @@ class FpaClient:
             return
         subscription = _Subscription(on_message, on_connection)
         self._subscriptions[device_id] = subscription
+        self.reconnect_attempts[device_id] = 0
         subscription.task = asyncio.create_task(
             self._listen(device_id, subscription),
             name="fpa_websocket",
@@ -444,6 +446,8 @@ class FpaClient:
         reconnect = False
         generation = self._auth_generation
         while not self.closed:
+            if reconnect:
+                self.reconnect_attempts[device_id] += 1
             try:
                 await self._initialize()
                 if reconnect:
@@ -542,6 +546,7 @@ class FpaClient:
             if tasks:
                 await asyncio.gather(*tasks, return_exceptions=True)
             self._subscriptions.clear()
+            self.reconnect_attempts.clear()
 
 
 __all__ = [
