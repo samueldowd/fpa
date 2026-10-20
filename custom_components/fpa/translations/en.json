@@ -1,0 +1,189 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect Formula Pro Advanced WiFi",
+        "description": "Enter your Baby Brezza cloud account credentials. Your password is used to sign in and is not stored.",
+        "data": {
+          "email": "Email",
+          "password": "Password"
+        }
+      },
+      "reauth_confirm": {
+        "title": "Sign in again",
+        "description": "Your Baby Brezza session has expired. Sign in with the same account to reconnect your existing machines.",
+        "data": {
+          "email": "Email",
+          "password": "Password"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Unable to connect. Check your internet connection and try again.",
+      "invalid_auth": "The credentials were rejected. Check your email and password.",
+      "unknown": "An unexpected error occurred. Try again and download diagnostics if it persists."
+    },
+    "abort": {
+      "already_configured": "This account is already configured.",
+      "reauth_successful": "Authentication was successful.",
+      "reauth_account_mismatch": "Sign in with the same account as this existing integration."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "summary": {
+        "name": "Status",
+        "state": {
+          "requesting_bottle": "Requesting bottle",
+          "making_bottle": "Making bottle",
+          "full_bottle": "Full bottle",
+          "funnel_cleaning_needed": "Funnel cleaning needed",
+          "funnel_out": "Funnel removed",
+          "lid_open": "Lid open",
+          "low_water": "Low water",
+          "bottle_missing": "Bottle missing",
+          "ready": "Ready",
+          "heating": "Heating",
+          "cooling": "Cooling",
+          "bottle_check_needed": "Remove and replace bottle to verify it is empty"
+        }
+      },
+      "selected_volume": {
+        "name": "Selected volume"
+      },
+      "temperature_setting": {
+        "name": "Temperature setting",
+        "state": {
+          "room_temperature": "Room Temperature",
+          "body_temperature": "Body Temperature",
+          "above_body_temperature": "Above Body Temperature"
+        }
+      },
+      "powder_setting": {
+        "name": "Powder setting"
+      },
+      "last_preparation": {
+        "name": "Last preparation"
+      }
+    },
+    "binary_sensor": {
+      "making_bottle": {
+        "name": "Making bottle"
+      },
+      "water_only": {
+        "name": "Water only"
+      },
+      "bottle_missing": {
+        "name": "Bottle missing"
+      },
+      "funnel_cleaning_needed": {
+        "name": "Funnel cleaning needed"
+      },
+      "funnel_out": {
+        "name": "Funnel removed"
+      },
+      "lid_open": {
+        "name": "Lid open"
+      },
+      "low_water": {
+        "name": "Low water"
+      },
+      "heating": {
+        "name": "Heating"
+      },
+      "cooling": {
+        "name": "Cooling"
+      }
+    },
+    "select": {
+      "preset": {
+        "name": "Bottle preset"
+      }
+    },
+    "button": {
+      "start_selected_preset": {
+        "name": "Start selected preset"
+      },
+      "refresh_data": {
+        "name": "Refresh data"
+      }
+    }
+  },
+  "exceptions": {
+    "invalid_auth": {
+      "message": "Your Baby Brezza session is no longer valid. Sign in again."
+    },
+    "cannot_connect": {
+      "message": "Unable to reach the Baby Brezza cloud. Check your internet connection and try again."
+    },
+    "selection_required": {
+      "message": "Choose a bottle preset before starting."
+    },
+    "invalid_preset": {
+      "message": "This preset is no longer available for this machine. Refresh data and select a current preset."
+    },
+    "invalid_target": {
+      "message": "Target the machine summary sensor when using Start bottle."
+    },
+    "command_failed": {
+      "message": "The cloud rejected the start request. Refresh data and check the machine before trying again."
+    },
+    "command_indeterminate": {
+      "message": "The start outcome is uncertain. Check the machine; the request will not be retried automatically. Remove and replace the bottle before another start if requested."
+    },
+    "refresh_failed": {
+      "message": "Unable to refresh cloud data. Previously received data is retained; try again later."
+    },
+    "blocked_device_unavailable": {
+      "message": "The machine is disconnected or its current state is unavailable. Check the machine and cloud connection, then refresh data before trying again."
+    },
+    "blocked_request_pending": {
+      "message": "A start request is already being checked or is waiting for a machine update. Check the machine and wait for that request to resolve before trying again."
+    },
+    "blocked_making_bottle": {
+      "message": "The machine is already preparing a bottle. Wait for it to finish, then remove the completed bottle before starting another."
+    },
+    "blocked_occupied_bottle": {
+      "message": "Remove the completed bottle and replace it with an empty bottle before starting another preparation."
+    },
+    "blocked_bottle_check_needed": {
+      "message": "The integration cannot verify that the bottle is empty. Remove the bottle, check or empty it, and replace it before starting."
+    },
+    "blocked_readiness_unverified": {
+      "message": "The cloud has not reported all fields needed to verify that the machine is ready. Refresh data and check the machine. If this continues, download diagnostics for support."
+    },
+    "blocked_bottle_missing": {
+      "message": "Place an empty bottle under the funnel, then wait for the machine to report it present before starting."
+    },
+    "blocked_funnel_cleaning_needed": {
+      "message": "Clean and reinstall the funnel according to the manufacturer's instructions, then wait for the cleaning alert to clear before starting."
+    },
+    "blocked_funnel_out": {
+      "message": "Reinstall the funnel, then wait for the machine to report it present before starting."
+    },
+    "blocked_lid_open": {
+      "message": "Close the machine lid, then wait for the lid alert to clear before starting."
+    },
+    "blocked_low_water": {
+      "message": "Refill the water tank according to the manufacturer's instructions, then wait for the low-water alert to clear before starting."
+    },
+    "blocked_heating": {
+      "message": "The machine is heating. Wait for heating to finish before starting."
+    },
+    "blocked_cooling": {
+      "message": "The machine is cooling. Wait for cooling to finish before starting."
+    }
+  },
+  "services": {
+    "turn_on": {
+      "name": "Start bottle",
+      "description": "Start a saved cloud preset after a fresh machine-state safety check. Target the original machine summary sensor.",
+      "fields": {
+        "bottle_id": {
+          "name": "Bottle ID",
+          "description": "Positive integer ID of a saved preset belonging to the targeted machine."
+        }
+      }
+    }
+  }
+}

@@ -1,7 +1,7 @@
 """Shared sanitized fixtures and isolated Home Assistant setup."""
 
-from copy import deepcopy
 import json
+from copy import deepcopy
 from pathlib import Path
 
 import pytest
@@ -24,10 +24,14 @@ def wire_device(reference, index=0):
     """Reconstruct vendor wire shape; the supplied export isn't a REST response."""
     source = deepcopy(reference["devices"][index])
     mapping = {
-        "device_id": "deviceId", "wifi_mac_address": "wifiMacAddress",
-        "ble_mac_address": "bleMacAddress", "volume_unit": "volumeUnit",
-        "water_only": "waterOnly", "bottle_creation_log": "bottleCreationLog",
-        "bottle_id": "bottleId", "powder_setting": "powderSetting",
+        "device_id": "deviceId",
+        "wifi_mac_address": "wifiMacAddress",
+        "ble_mac_address": "bleMacAddress",
+        "volume_unit": "volumeUnit",
+        "water_only": "waterOnly",
+        "bottle_creation_log": "bottleCreationLog",
+        "bottle_id": "bottleId",
+        "powder_setting": "powderSetting",
         "completion_timestamp": "completionTimestamp",
     }
 
@@ -52,4 +56,7 @@ def device_payload(reference):
 
 @pytest.fixture
 def identity(device_payload):
-    return {k: device_payload[k] for k in ("id", "deviceId", "title", "wifiMacAddress", "bleMacAddress")}
+    return {
+        k: device_payload[k]
+        for k in ("id", "deviceId", "title", "wifiMacAddress", "bleMacAddress")
+    }

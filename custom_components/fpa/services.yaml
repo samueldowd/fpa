@@ -1,0 +1,18 @@
+turn_on:
+  name: Start bottle
+  description: Start a saved cloud preset after a fresh machine-state safety check.
+  target:
+    entity:
+      integration: fpa
+      domain: sensor
+  fields:
+    bottle_id:
+      name: Bottle ID
+      description: Positive integer ID of a saved preset belonging to the targeted machine. Target its original summary sensor.
+      required: true
+      example: 101
+      selector:
+        number:
+          min: 1
+          mode: box
+          step: 1

@@ -1,6 +1,5 @@
 {
-    "name": "Formula Pro Advanced WiFi",
-    "homeassistant": "2023.5.0",
-    "content_in_root": true,
-    "render_readme": true
+  "name": "Formula Pro Advanced WiFi",
+  "homeassistant": "2025.10.4",
+  "render_readme": true
 }

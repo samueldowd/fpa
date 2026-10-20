@@ -4,7 +4,12 @@
 def test_fixture_reconstructs_wire_protocol(device_payload):
     assert device_payload["deviceId"] == "00000000-0000-4000-8000-000000000001"
     assert "raw_shadow" not in device_payload
-    assert device_payload["shadow"]["state"]["reported"]["hardware"]["alerts"]["tempHeating"] is False
+    assert (
+        device_payload["shadow"]["state"]["reported"]["hardware"]["alerts"][
+            "tempHeating"
+        ]
+        is False
+    )
     assert device_payload["bottleCreationLog"][0]["completionTimestamp"] == "1735732721"
     assert device_payload["bottleCreationLog"][6]["bottleId"] is None
 
