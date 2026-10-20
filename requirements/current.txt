@@ -3,7 +3,7 @@ ruff==0.14.1
 markdown-it-py==4.2.0
 linkify-it-py==2.2.0
 aiogithubapi==26.0.0
-infrared-protocols==10.1.0
+infrared-protocols==10.3.0
 ruamel.yaml==0.19.1
 stdlib-list==0.12.0
 astor==0.8.1
