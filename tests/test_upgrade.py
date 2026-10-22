@@ -58,7 +58,7 @@ async def test_upstream_entry_and_registry_preserved_on_first_fork_load(
         assert current.disabled_by == (
             er.RegistryEntryDisabler.USER if disabled else None
         )
-        assert len(er.async_entries_for_config_entry(registry, entry.entry_id)) == 17
+        assert len(er.async_entries_for_config_entry(registry, entry.entry_id)) == 19
         assert entry.version == 1 and entry.data["refresh_token"] == "upstream-v1-token"
         updated_device = dr.async_get(hass).async_get(device.id)
         assert (

@@ -14,6 +14,7 @@ The manufacturer's app sets up your machine and saved presets. This integration 
 | **Check the reported settings** | See selected volume, temperature setting, powder setting, and water-only mode rather than relying on a preset's name. [Explore the sensors](docs/USER_GUIDE.md#sensors). |
 | **Choose a familiar preset and start it intentionally** | A named dropdown remembers your selection; a separate Start button requests preparation. Choosing a preset alone never changes the machine or dispenses. [See everyday use](docs/USER_GUIDE.md#everyday-use). |
 | **Check the latest preparation** | A timestamp sensor shows the newest cloud-reported completion with that preparation's settings. Home Assistant Recorder can retain the observations under your normal history settings. [Understand preparation history](docs/USER_GUIDE.md#updates-and-preparation-history). |
+| **Track bottles until a funnel change** | A local counter starts at four, decreases on reported completions, and resets on funnel removal or Reset. The cleaning-needed alert stays API-derived. [See the sensors](docs/USER_GUIDE.md#sensors). |
 | **Pick up changes made in the app** | Refresh data reloads presets and current machine data without restarting the integration. [See the controls](docs/USER_GUIDE.md#select-and-buttons). |
 | **Understand a blocked start or connection problem** | Home Assistant's native diagnostics download includes cached status, guard reasons, and bounded, redacted cloud updates. [Diagnose a problem](docs/USER_GUIDE.md#download-diagnostics). |
 
@@ -37,7 +38,7 @@ See the latest reported completion and the settings associated with it, includin
 
 ## What appears in Home Assistant?
 
-Each machine appears as a device with **17 entities**: five sensors, nine binary sensors, a preset dropdown, and two buttons. Together they cover the machine summary, current settings, individual alerts, latest preparation, preset selection, Start, and Refresh.
+Each machine appears as a device with **19 entities**: six sensors, nine binary sensors, a preset dropdown, and three buttons. Together they cover the machine summary, current settings, individual alerts, latest preparation, preset selection, Start, Refresh, and a local funnel counter with Reset.
 
 State updates arrive through the manufacturer cloud's push connection. Preset selection is remembered across Home Assistant restarts, and renamed presets keep their identity. [See the complete entity catalog](docs/USER_GUIDE.md#entities).
 

@@ -1,4 +1,4 @@
-"""Summary, current settings, and one historical preparation per machine."""
+"""Reported settings and preparation, plus a local funnel allowance per machine."""
 
 from __future__ import annotations
 
@@ -63,7 +63,7 @@ async def async_setup_entry(
     entry: FpaConfigEntry,
     async_add_entities: AddEntitiesCallback,
 ) -> None:
-    """Add exactly five sensors for each machine."""
+    """Add reported sensors and the local funnel allowance for each machine."""
     entities: list[SensorEntity] = []
     for coordinator in entry.runtime_data.devices.values():
         entities.append(FpaMainSensor(coordinator))
@@ -72,6 +72,7 @@ async def async_setup_entry(
             for description in SETTING_DESCRIPTIONS
         )
         entities.append(FpaLastPreparationSensor(coordinator))
+        entities.append(FpaFunnelRemainingSensor(coordinator))
     async_add_entities(entities)
 
     platform = entity_platform.async_get_current_platform()
@@ -175,6 +176,24 @@ class FpaSettingSensor(FpaEntity, SensorEntity):
         if self.entity_description.key == "temperature_setting":
             return {"temperature_code": self.coordinator.data.settings.temperature}
         return None
+
+
+class FpaFunnelRemainingSensor(FpaEntity, SensorEntity):
+    """Local bottles remaining; never a source for reported cleaning alerts."""
+
+    _attr_translation_key = "funnel_bottles_remaining"
+    _attr_icon = "mdi:baby-bottle-outline"
+
+    def __init__(self, coordinator: DeviceCoordinator) -> None:
+        super().__init__(coordinator, "funnel_bottles_remaining")
+
+    @property
+    def available(self) -> bool:
+        return True
+
+    @property
+    def native_value(self) -> int:
+        return self.coordinator.funnel.remaining
 
 
 class FpaLastPreparationSensor(FpaEntity, RestoreSensor):

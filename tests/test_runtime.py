@@ -453,11 +453,11 @@ async def test_capture_failure_unknown_subject_ownership_and_close(runtime):
     runtime.api.close.assert_awaited_once()
 
 
-async def test_storage_only_contains_minimal_guard_and_selection(runtime):
+async def test_storage_only_contains_guard_selection_and_local_funnel_counter(runtime):
     device = coordinator(runtime)
     await device.async_select(1001)
     stored = runtime.storage.get(device.device_id)
-    assert set(stored) == {"selected_id", "guard"}
+    assert set(stored) == {"selected_id", "guard", "funnel"}
     assert set(stored["guard"]) == {
         "pending",
         "occupied",

@@ -81,7 +81,7 @@ The selected **ID** survives HA restarts and preset renames. Duplicate names gai
 
 ## Entities
 
-Every machine has **17 entities**: five sensors, nine binary sensors, one select and two buttons. All new entities are enabled by default. Examples use synthetic names; actual entity IDs depend on HA naming and your customizations. New unique IDs use the original device ID plus a stable suffix; the original summary's unique ID stays unchanged.
+Every machine has **19 entities**: six sensors, nine binary sensors, one select and three buttons. All new entities are enabled by default. Examples use synthetic names; actual entity IDs depend on HA naming and your customizations. New unique IDs use the original device ID plus a stable suffix; the original summary's unique ID stays unchanged.
 
 Live settings, alerts, summary and Start are unavailable unless the cloud transport is connected and a usable snapshot reports the appliance online. An absent field is **unknown**, not zero/false. Last preparation remains historical through outages; the dropdown can use cached presets, and Refresh can be attempted while the appliance is offline.
 
@@ -93,7 +93,10 @@ Live settings, alerts, summary and Start are unavailable unless the cloud transp
 | Selected volume | Numeric quantity in the reported unit (`oz` is a volume setting) | No mass conversion or statistical state class; not final mixture volume. |
 | Temperature setting | Room Temperature, Body Temperature, Above Body Temperature | `temperature_code` retains the raw code. Unexpected codes produce unknown. No degrees unit. |
 | Powder setting | Numeric configured setting | No mass/concentration unit or statistical state class. |
+| Funnel bottles remaining | Local integer allowance from 0 to 4 | Starts at 4; subtracts one per distinct reported completion; resets to 4 on Funnel removed turning on or Reset. Persists across restarts. |
 | Last preparation | Cloud completion timestamp, timezone-aware internally | `record_id`, `volume`, `volume_unit`, `temperature_setting` (numeric), `powder_setting`, `water_only`, `preset_id`. Nullable IDs/mode remain null. One historical snapshot; no state class. |
+
+**Funnel bottles remaining** is a local counter. Initial setup treats existing preparation history as a baseline, so it starts at 4. Duplicate completion updates and later record enrichment do not subtract again. Every reported completed preparation counts, including water-only preparations. Funnel removal resets the allowance when it turns on; repeated on reports do not reset it again. **Reset** sets it to 4 without a machine command. The counter and Reset remain available offline. An allowance of 0 is the expected cleaning point, but it never sets **Funnel cleaning needed**, changes other reported sensors, or adds a start restriction. The cleaning alert remains entirely API-derived. Missed funnel-removal transitions cannot be recovered; after an outage, only the latest reported completion can be counted.
 
 Summary raw states retained: `requesting_bottle`, `making_bottle`, `full_bottle`, `funnel_cleaning_needed`, `funnel_out`, `lid_open`, `low_water`, `bottle_missing`, `ready`. Added states: `heating`, `cooling`, and `bottle_check_needed`. Unknown readiness does not produce `ready`. The unsupported custom `fpa__state` device class is replaced by HA's enum metadata without recreating the entity. Alert priority remains compatible; independent alerts show simultaneous conditions.
 
@@ -119,6 +122,7 @@ Making bottle uses HA's running class; funnel/low-water alerts use problem seman
 |---|---|---|
 | Bottle preset | Choose a named cloud preset locally | Cached valid list permitted offline. Selected `preset_id`, volume/unit, temperature/powder codes, mode, and description. No automatic first selection. |
 | Start selected preset | Deliberately start the selected preset | Requires live state and all shared safeguards. Uses the current cloud definition after fresh preflight. |
+| Reset | Set Funnel bottles remaining to 4 | Local configuration button; works offline and does not clear the machine’s cleaning alert. |
 | Refresh data | Fetch details, presets, settings, alerts and latest preparation | Diagnostic category. Account reads may work while the machine is offline. Repeated requests coalesce; manual successes have a five-second cooldown. No machine write. |
 
 ## Temperature settings
@@ -232,7 +236,7 @@ Diagnostics are the first support artifact. If advanced logging is requested, en
 
 ## Limitations and support
 
-The vendor API is unofficial and can change. Only saved cloud presets can start; this release supplies no local control, writable settings, preset editing, firmware/error entities, stop controls, custom dashboard, completion events, notification automations, archive, counters, intake estimates or formula recommendations. It does not measure powder mass, water temperature, final mixture volume or infant intake.
+The vendor API is unofficial and can change. Only saved cloud presets can start; this release supplies no local control, writable settings, preset editing, firmware/error entities, stop controls, custom dashboard, completion events, notification automations, archive, intake estimates or formula recommendations. It does not measure powder mass, water temperature, final mixture volume or infant intake.
 
 Use the [issue tracker](https://github.com/samueldowd/fpa/issues). Include HA/integration versions, reproduction, observed state/error and **reviewed** diagnostics; [the issue template](../.github/ISSUE_TEMPLATE/bug_report.yml) lists requested information. See [release notes](RELEASE_NOTES.md), [validation evidence](IMPLEMENTATION_VALIDATION.md), and [decisions](IMPLEMENTATION_DECISIONS.md).
 

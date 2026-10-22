@@ -64,6 +64,9 @@
       },
       "last_preparation": {
         "name": "Last preparation"
+      },
+      "funnel_bottles_remaining": {
+        "name": "Funnel bottles remaining"
       }
     },
     "binary_sensor": {
@@ -106,6 +109,9 @@
       },
       "refresh_data": {
         "name": "Refresh data"
+      },
+      "reset_funnel_counter": {
+        "name": "Reset"
       }
     }
   },

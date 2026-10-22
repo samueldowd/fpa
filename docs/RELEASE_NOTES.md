@@ -1,3 +1,8 @@
+# Unreleased
+
+- Add Funnel bottles remaining and Reset on each device (19 entities/machine). The local counter starts at 4, decrements once per distinct reported completed preparation, stays within 0–4, persists across restarts, and resets on funnel removal or Reset.
+- Keep all existing reported sensors and machine start safeguards independent of this counter; Funnel cleaning needed remains API-derived.
+
 # 1.0.0
 
 Local first-fork build, 2026-10-19. Publication and hardware verification have not been performed.

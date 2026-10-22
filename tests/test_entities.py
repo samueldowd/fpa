@@ -54,13 +54,13 @@ def entity_id(hass, coordinator, domain, suffix=None):
     return er.async_get(hass).async_get_entity_id(domain, "fpa", unique_id)
 
 
-async def test_seventeen_entities_preserve_original_identity_and_attributes(
+async def test_nineteen_entities_preserve_original_identity_and_attributes(
     hass, configured
 ):
     entry, api, coordinator = configured
     registry = er.async_get(hass)
     entries = er.async_entries_for_config_entry(registry, entry.entry_id)
-    assert len(entries) == 17
+    assert len(entries) == 19
     assert len({entity.device_id for entity in entries}) == 1
     device = dr.async_get(hass).async_get(
         registry.async_get(entity_id(hass, coordinator, "sensor")).device_id
@@ -367,7 +367,7 @@ async def test_registry_customizations_survive_reload(hass, configured):
     assert registry.async_get(summary_id).icon == "mdi:cup"
     assert registry.async_get(summary_id).unique_id == coordinator.device_id
     assert dr.async_get(hass).async_get(device.id).name_by_user == "Kitchen appliance"
-    assert len(er.async_entries_for_config_entry(registry, entry.entry_id)) == 17
+    assert len(er.async_entries_for_config_entry(registry, entry.entry_id)) == 19
 
 
 async def test_equal_timestamp_restore_keeps_current_cloud_record(hass, configured):
@@ -456,11 +456,11 @@ async def test_accounts_and_devices_keep_selection_and_services_isolated(
     other = other_entry.runtime_data.devices[other_identity["deviceId"]]
     assert (
         len(er.async_entries_for_config_entry(er.async_get(hass), first_entry.entry_id))
-        == 17
+        == 19
     )
     assert (
         len(er.async_entries_for_config_entry(er.async_get(hass), other_entry.entry_id))
-        == 17
+        == 19
     )
     selected_id = next(iter(first.presets))
     await first.async_select(selected_id)

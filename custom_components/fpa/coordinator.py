@@ -16,6 +16,7 @@ from homeassistant.exceptions import HomeAssistantError, ServiceValidationError
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 
 from .api import ApiError, AuthenticationError, FpaClient
+from .funnel import FunnelCounter
 from .models import (
     DeviceState,
     Preparation,
@@ -187,7 +188,7 @@ class FpaRuntime:
 
 
 class DeviceCoordinator(DataUpdateCoordinator[DeviceState]):
-    """One atomic state cache and one operation lock shared by all 17 entities."""
+    """One atomic state cache and one operation lock shared by all entities."""
 
     def __init__(self, runtime: FpaRuntime, identity: dict) -> None:
         self.runtime = runtime
@@ -198,6 +199,7 @@ class DeviceCoordinator(DataUpdateCoordinator[DeviceState]):
         self.data = DeviceState()
         self.presets = {}
         stored = runtime.storage.get(self.device_id)
+        self.funnel = FunnelCounter.from_storage(stored.get("funnel"))
         self.selected_id = stored.get("selected_id")
         saved_guard = stored.get("guard", {})
         self.guard = BottleGuard(
@@ -298,8 +300,17 @@ class DeviceCoordinator(DataUpdateCoordinator[DeviceState]):
 
     async def _save(self) -> None:
         await self.runtime.storage.async_save(
-            self.device_id, self.selected_id, self.guard.persistent()
+            self.device_id,
+            self.selected_id,
+            self.guard.persistent(),
+            self.funnel.persistent(),
         )
+
+    async def async_reset_funnel(self) -> None:
+        """Reset the local counter without a cloud or appliance command."""
+        self.funnel.reset()
+        self._publish()
+        await self._save()
 
     def _schedule_save(self) -> None:
         if not self._closed:
@@ -311,12 +322,21 @@ class DeviceCoordinator(DataUpdateCoordinator[DeviceState]):
             self._command_timer = None
 
     def _accept_state(
-        self, raw: dict, candidate: Preparation | None, *, reconnect=False
+        self,
+        raw: dict,
+        candidate: Preparation | None,
+        *,
+        reconnect=False,
+        initialize_funnel=False,
     ) -> None:
         old_state = self.data
         previous_guard = self.guard.persistent()
+        previous_funnel = self.funnel.persistent()
         preparation = newest_preparation(old_state.preparation, candidate)
         state = normalize_shadow(raw, preparation)
+        self.funnel.observe(
+            preparation, state.alerts.funnel_out, initialize=initialize_funnel
+        )
         self._raw_shadow = deepcopy(raw)
         # An outage invalidates evidence of the present bottle's contents.
         if reconnect and state.alerts.bottle_missing is not True:
@@ -368,7 +388,10 @@ class DeviceCoordinator(DataUpdateCoordinator[DeviceState]):
                 preparation.provenance if preparation else None,
             )
         self._publish(state)
-        if previous_guard != self.guard.persistent():
+        if (
+            previous_guard != self.guard.persistent()
+            or previous_funnel != self.funnel.persistent()
+        ):
             self._schedule_save()
 
     @staticmethod
@@ -561,7 +584,12 @@ class DeviceCoordinator(DataUpdateCoordinator[DeviceState]):
                             raw = ordered_shadow_merge(raw, patch)
                     # A replayed partial new timestamp must not inherit REST's old settings.
                     candidate = newest_preparation(candidate, self.data.preparation)
-                self._accept_state(raw, candidate, reconnect=self._needs_bottle_check)
+                self._accept_state(
+                    raw,
+                    candidate,
+                    reconnect=self._needs_bottle_check,
+                    initialize_funnel=True,
+                )
                 self._needs_bottle_check = False
             else:
                 raise ApiError("protocol")
