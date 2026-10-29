@@ -121,8 +121,6 @@ async def test_fresh_preflight_and_no_dropdown_change_for_legacy_start(runtime):
         "funnelOut",
         "lidOpen",
         "lowWater",
-        "tempHeating",
-        "tempCooling",
     ],
 )
 async def test_every_alert_blocks_both_start_paths(runtime, field):
@@ -135,6 +133,48 @@ async def test_every_alert_blocks_both_start_paths(runtime, field):
         await device.async_start()
     with pytest.raises(ServiceValidationError):
         await device.async_start(1001)
+    runtime.api.start_bottle.assert_not_awaited()
+
+
+@pytest.mark.parametrize("field", ["tempHeating", "tempCooling"])
+@pytest.mark.parametrize("preset_id", [None, 1001])
+async def test_temperature_activity_alone_does_not_block_start(runtime, field, preset_id):
+    device = ready(runtime)
+    await device.async_select(1001)
+    alerts = runtime.api.details["shadow"]["state"]["reported"]["hardware"]["alerts"]
+    alerts[field] = True
+    await device.async_start(preset_id)
+    runtime.api.start_bottle.assert_awaited_once_with(1001)
+    assert getattr(
+        device.data.alerts, "heating" if field == "tempHeating" else "cooling"
+    )
+
+
+@pytest.mark.parametrize("field", ["tempHeating", "tempCooling"])
+@pytest.mark.parametrize(
+    "blocker",
+    ["bottleMissing", "funnelCleaningNeeded", "funnelOut", "lidOpen", "lowWater"],
+)
+@pytest.mark.parametrize("preset_id", [None, 1001])
+async def test_temperature_activity_does_not_bypass_other_alerts(
+    runtime, field, blocker, preset_id
+):
+    device = ready(runtime)
+    await device.async_select(1001)
+    alerts = runtime.api.details["shadow"]["state"]["reported"]["hardware"]["alerts"]
+    alerts[field] = alerts[blocker] = True
+    with pytest.raises(ServiceValidationError):
+        await device.async_start(preset_id)
+    runtime.api.start_bottle.assert_not_awaited()
+
+
+@pytest.mark.parametrize("field", ["tempHeating", "tempCooling"])
+async def test_unknown_temperature_activity_still_blocks_start(runtime, field):
+    device = ready(runtime)
+    del runtime.api.details["shadow"]["state"]["reported"]["hardware"]["alerts"][field]
+    with pytest.raises(ServiceValidationError):
+        await device.async_start(1001)
+    assert "readiness_unverified" in device.block_reasons
     runtime.api.start_bottle.assert_not_awaited()
 
 
