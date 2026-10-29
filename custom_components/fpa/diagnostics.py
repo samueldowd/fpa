@@ -261,7 +261,7 @@ def _snapshot(runtime, entry, device_id=None):
     report = {
         "schema_version": 1,
         "integration": {
-            "version": "1.0.0",
+            "version": "1.1.0",
             "client_origin": "joncar/pybabyfpa",
             "reviewed_client_version": "0.0.7",
             "client_revision": "8f91cdbc38025d753dcd437f15fedeea5c63253a",

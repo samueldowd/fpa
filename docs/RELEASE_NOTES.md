@@ -1,7 +1,12 @@
-# Unreleased
+# 1.1.0
 
-- Add Funnel bottles remaining and Reset on each device (19 entities/machine). The local counter starts at 4, decrements once per distinct reported completed preparation, stays within 0–4, persists across restarts, and resets on funnel removal or Reset.
-- Keep all existing reported sensors and machine start safeguards independent of this counter; Funnel cleaning needed remains API-derived.
+## What's changed
+
+- **Start requests:** Reported heating or cooling alone no longer blocks a start. Both states remain visible. Missing activity values still leave readiness unverified, and the other start safeguards remain in place. This addresses the persistent cooling report in issue #7.
+- **Funnel counter:** Confirmed water-only preparations no longer reduce Funnel bottles remaining. Formula and unknown-mode preparations continue to count; unknown runs later identified as water-only and previously counted runs are not automatically corrected. This addresses issue #9.
+- **Funnel allowance:** The local counter starts at 4, persists across restarts, and resets on funnel removal or the Reset button. The appliance-reported funnel cleaning alert and start safeguards remain independent of the counter.
+
+Both fixes passed the Home Assistant test matrix and HACS and Hassfest validation. They have not been verified on the affected physical appliance. A command accepted by the cloud does not guarantee that the appliance started or completed a preparation.
 
 # 1.0.0
 

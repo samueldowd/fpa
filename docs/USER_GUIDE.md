@@ -6,7 +6,7 @@ Installation, configuration, daily operation, entity and action references, prep
 
 Monitor a Baby Brezza Formula Pro Advanced **WiFi**, select a saved cloud preset, deliberately start a preparation, and see its latest reported preparation in Home Assistant. Independent alerts and a native diagnostics download help explain stale data and blocked starts.
 
-This community fork extends [joncar/ha-fpa](https://github.com/joncar/ha-fpa). It is independent of Baby Brezza and is not endorsed by the manufacturer. Version **1.0.0** retains the `fpa` domain, original summary entity, and `fpa.turn_on` action.
+This community fork extends [joncar/ha-fpa](https://github.com/joncar/ha-fpa). It is independent of Baby Brezza and is not endorsed by the manufacturer. Version **1.1.0** retains the `fpa` domain, original summary entity, and `fpa.turn_on` action.
 
 ## Contents
 
@@ -48,8 +48,8 @@ HACS reads the conventional `custom_components/fpa` directory from the published
 ### Manual installation from this delivery
 
 1. Make a normal HA backup. If replacing upstream, follow the upgrade instructions before copying files.
-2. Extract `fpa-1.0.0.zip` into your HA configuration directory. The result must be **`<config>/custom_components/fpa/manifest.json`**, alongside `__init__.py`, the entity platforms, `translations/`, `vendor/`, and `brand/`. Do not add an extra `fpa-1.0.0` directory level.
-3. Restart HA, then add the integration. Source users can copy this repository's complete `custom_components/fpa` directory instead.
+2. Download and extract the release's source archive, then copy its complete `custom_components/fpa` directory into your HA configuration directory. The result must be **`<config>/custom_components/fpa/manifest.json`**, alongside `__init__.py`, the entity platforms, `translations/`, `vendor/`, and `brand/`. Do not add an extra directory level.
+3. Restart HA, then add the integration.
 
 ## Configuration and upgrades
 
