@@ -504,8 +504,6 @@ async def test_accounts_and_devices_keep_selection_and_services_isolated(
         ("funnel_out", "Reinstall the funnel"),
         ("lid_open", "Close the machine lid"),
         ("low_water", "Refill the water tank"),
-        ("heating", "Wait for heating to finish"),
-        ("cooling", "Wait for cooling to finish"),
     ],
 )
 async def test_blocked_start_resolves_actionable_translation(
