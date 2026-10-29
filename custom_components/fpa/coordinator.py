@@ -264,7 +264,9 @@ class DeviceCoordinator(DataUpdateCoordinator[DeviceState]):
         if any(value is None for value in critical.values()):
             reasons.append("readiness_unverified")
         reasons.extend(
-            key for key, value in asdict(self.data.alerts).items() if value is True
+            key
+            for key, value in asdict(self.data.alerts).items()
+            if value is True and key not in ("heating", "cooling")
         )
         return list(dict.fromkeys(reasons))
 

@@ -186,7 +186,7 @@ All dispensing examples use the same guards. There is no bypass action. In the U
 
 ## Start protection
 
-Both Start and `fpa.turn_on` share a per-machine lock and a **fresh details read**, even within the manual refresh cooldown. HA verifies preset ownership/connectivity and blocks pending/running requests, absent bottles, low water, open lids, removed/unclean funnels, heating/cooling, unknown critical safety values, and occupied/uncertain bottles. Disabling the summary does not disable these checks.
+Both Start and `fpa.turn_on` share a per-machine lock and a **fresh details read**, even within the manual refresh cooldown. HA verifies preset ownership/connectivity and blocks pending/running requests, absent bottles, low water, open lids, removed/unclean funnels, unknown critical safety values, and occupied/uncertain bottles. Reported heating or cooling alone does not block a start; the sensors and summary still display those reported states. Missing heating/cooling values still make readiness unverified. Disabling the summary does not disable these checks.
 
 A newly reported preparation marks a present bottle occupied, including preparations initiated through the machine or app. Observe **bottle missing**, then replace the bottle, before another HA preparation. After startup/reconnect, a present bottle with uncertain occupancy requires removal/replacement; Refresh or waiting cannot prove it empty. `bottle_check_needed` explains this conservative state. No reset/bypass button is provided.
 
@@ -223,7 +223,7 @@ Messages are sanitized defensive copies captured before merging. Known non-sensi
 |---|---|
 | No presets / no selection | Create saved presets in the app, press Refresh, and select one. Deletion clears selection without fallback. Inspect the refresh outcome. |
 | Bottle check/full bottle blocks Start | Remove the bottle until HA observes Bottle missing, then replace it. Check other real alerts. Refresh/restart is not a reset. |
-| Heating/cooling or unknown readiness | Wait for actual flags to clear. Missing flags stay unknown; report unsupported data instead of bypassing guards. |
+| Heating/cooling or unknown readiness | Heating and cooling remain visible but do not alone block a start. Missing flags stay unknown and block readiness; report unsupported data instead of bypassing guards. |
 | Data unavailable/stale | Check internet/cloud access and reported appliance connectivity. A connected HA socket alone is insufficient. Use Refresh and cached diagnostics. |
 | Accepted request without running/completion | Check the machine and diagnostics. Allow the observation timeout; do not repeatedly press Start or assume a timeout canceled the command. |
 | Credentials expired | Use Reauthenticate. Invalid credentials are distinct from DNS/TLS/timeouts/server failures. |
