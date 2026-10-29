@@ -55,7 +55,7 @@ async def test_allowance_bounds_resets_and_api_alert_independence(hass, configur
 
     for expected in (3, 2, 1, 0, 0):
         reported = completion(coordinator)
-        reported["lastBottle"]["waterOnly"] = expected == 3
+        reported["lastBottle"]["waterOnly"] = False
         push(coordinator, reported)
         await hass.async_block_till_done()
         assert hass.states.get(counter_id).state == str(expected)
@@ -117,6 +117,69 @@ async def test_counter_survives_reload_without_recounting_history(hass, configur
     await hass.config_entries.async_reload(entry.entry_id)
     await hass.async_block_till_done()
     assert hass.states.get(counter_id).state == "4"
+
+
+async def test_water_only_does_not_count_or_reappear_after_reload(hass, configured):
+    entry, _, coordinator = configured
+    counter_id = entity_id(hass, coordinator, "sensor", "funnel_bottles_remaining")
+    water = completion(coordinator)
+    water["lastBottle"]["waterOnly"] = True
+    push(coordinator, water)
+    await hass.async_block_till_done()
+    assert hass.states.get(counter_id).state == "4"
+    push(coordinator, water)
+    await hass.async_block_till_done()
+    assert hass.states.get(counter_id).state == "4"
+    await hass.config_entries.async_reload(entry.entry_id)
+    await hass.async_block_till_done()
+    restarted = entry.runtime_data.devices[coordinator.device_id]
+    push(restarted, water)
+    await hass.async_block_till_done()
+    assert hass.states.get(counter_id).state == "4"
+    formula = completion(restarted, seconds=2)
+    formula["lastBottle"]["waterOnly"] = False
+    push(restarted, formula)
+    await hass.async_block_till_done()
+    assert hass.states.get(counter_id).state == "3"
+
+
+@pytest.mark.parametrize("water_only,expected", [(True, 4), (False, 3), (None, 3)])
+async def test_completion_mode_and_cursor(hass, configured, water_only, expected):
+    _, _, coordinator = configured
+    previous = coordinator.data.preparation
+    counter = FunnelCounter()
+    counter.observe(previous, False, initialize=True)
+    newer = replace(
+        previous,
+        completed_at=previous.completed_at + timedelta(seconds=1),
+        record_id=None,
+        water_only=water_only,
+    )
+    counter.observe(newer, False)
+    assert counter.remaining == expected
+    assert counter.completed_at == newer.completed_at.timestamp()
+    counter = FunnelCounter.from_storage(counter.persistent())
+    counter.observe(replace(newer, record_id=9991), False)
+    assert counter.remaining == expected
+    counter.reset()
+    counter.observe(newer, False)
+    assert counter.remaining == 4
+
+
+async def test_unknown_mode_is_not_retroactively_corrected(hass, configured):
+    _, _, coordinator = configured
+    previous = coordinator.data.preparation
+    counter = FunnelCounter()
+    counter.observe(previous, False, initialize=True)
+    newer = replace(
+        previous,
+        completed_at=previous.completed_at + timedelta(seconds=1),
+        record_id=None,
+        water_only=None,
+    )
+    counter.observe(newer, False)
+    counter.observe(replace(newer, record_id=9991, water_only=True), False)
+    assert counter.remaining == 3
 
 
 async def test_completion_enrichment_and_reset_replays_do_not_count(hass, configured):
