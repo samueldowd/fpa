@@ -138,7 +138,9 @@ async def test_every_alert_blocks_both_start_paths(runtime, field):
 
 @pytest.mark.parametrize("field", ["tempHeating", "tempCooling"])
 @pytest.mark.parametrize("preset_id", [None, 1001])
-async def test_temperature_activity_alone_does_not_block_start(runtime, field, preset_id):
+async def test_temperature_activity_alone_does_not_block_start(
+    runtime, field, preset_id
+):
     device = ready(runtime)
     await device.async_select(1001)
     alerts = runtime.api.details["shadow"]["state"]["reported"]["hardware"]["alerts"]
