@@ -62,7 +62,9 @@ class FunnelCounter:
                     and self.record_id != preparation.record_id
                 )
             ):
-                self.remaining = max(0, self.remaining - 1)
+                # Unknown mode counts conservatively; only confirmed water is free.
+                if preparation.water_only is not True:
+                    self.remaining = max(0, self.remaining - 1)
         if (self.initialized or initialize) and preparation is not None:
             timestamp = preparation.completed_at.timestamp()
             if self.completed_at is None or timestamp >= self.completed_at:
