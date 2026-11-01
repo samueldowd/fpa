@@ -1,4 +1,4 @@
-pytest-homeassistant-custom-component==0.13.373
+pytest-homeassistant-custom-component==0.13.375
 ruff==0.14.1
 markdown-it-py==4.2.0
 linkify-it-py==2.2.0
